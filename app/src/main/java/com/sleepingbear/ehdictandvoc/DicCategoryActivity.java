@@ -236,7 +236,7 @@ public class DicCategoryActivity extends AppCompatActivity {
             if ( DicUtils.isNetWork(this) ) {
                 new AlertDialog.Builder(this)
                         .setTitle("알림")
-                        .setMessage("단어 정보를 가져오기 위해서 데이타를 사용합니다.\n연결하시겠습니까?")
+                        .setMessage("최근 수정일자를 기준으로 카테고리 변경사항을 갱신합니다.\n변경 정보를 가져오기 위해서 데이타를 사용합니다.\n연결하시겠습니까?")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

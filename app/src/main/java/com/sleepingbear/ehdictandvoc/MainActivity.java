@@ -413,17 +413,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                       @Override
                       public void onClick(DialogInterface dialog, int which) {
                           if (selectedTab == 0) {
-                              DicDb.initToday(db);
-
-                              DicUtils.writeNewInfoToFile(getApplicationContext(), db);
-
-                              ((TodayFragment) adapter.getItem(selectedTab)).changeListView();
-                          } else if (selectedTab == 2) {
                               DicDb.initVocabulary(db);
 
                               DicUtils.writeNewInfoToFile(getApplicationContext(), db);
 
                               ((VocabularyFragment) adapter.getItem(selectedTab)).changeListView();
+                          } else if (selectedTab == 2) {
+                              DicDb.initToday(db);
+
+                              DicUtils.writeNewInfoToFile(getApplicationContext(), db);
+
+                              ((TodayFragment) adapter.getItem(selectedTab)).changeListView();
                           }
                       }
                   })
