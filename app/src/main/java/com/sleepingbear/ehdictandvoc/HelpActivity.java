@@ -36,7 +36,7 @@ public class HelpActivity extends AppCompatActivity {
         tempSb.append("- 내가 등록한 단어를 보실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .하단의 + 버튼을 클릭해서 신규 단어장을 추가할 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .기존 단어장을 길게 클릭하시면 수정, 추가, 삭제,  내보내기, 가져오기를 하실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append(" .단어장을 클릭하시면 등록 된 단어를 보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .단어장을 클릭하시면 등록된 단어를 보실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);
         if ( "VOCABULARY".equals(b.getString("SCREEN")) ) {
             CurrentSb.append(tempSb.toString());
