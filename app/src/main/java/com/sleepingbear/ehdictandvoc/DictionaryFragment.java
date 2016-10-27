@@ -309,26 +309,6 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         } else if ( v.getId() == R.id.my_f_dic_cb_word ) {
             changeListView();
         }
-
-        setActionBarTitle();
-    }
-
-    public void setActionBarTitle() {
-        String title = "";
-        if ( "A".equals(mVhKind) ) {
-            title += "All";
-        } else if ( "F".equals(mVhKind) ) {
-            title += "영어->한국어";
-        } else {
-            title += "한국어->영어";
-        }
-        if ( "W".equals(mWsKind) ) {
-            title += ", 단어";
-        } else {
-            title += ", 예문";
-        }
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("  사전 - " + title);
     }
 
     private class DicSearchTask extends AsyncTask<Void, Void, Void> {
