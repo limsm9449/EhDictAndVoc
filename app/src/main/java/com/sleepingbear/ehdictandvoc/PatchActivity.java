@@ -29,7 +29,7 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
 
-        patch.append("* 2016.11.4" + CommConstants.sqlCR);
+        patch.append("* 2016.11.5" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("- 단어장에서 'MY 단어장'을 삭제한 후에 다른 단어를 추가할 경우 오류가 발생하여 삭제 못하도록 수정." + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
