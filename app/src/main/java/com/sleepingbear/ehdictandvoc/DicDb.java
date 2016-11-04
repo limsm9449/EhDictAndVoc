@@ -124,7 +124,7 @@ public class DicDb {
 
         sql.delete(0, sql.length());
         sql.append("INSERT INTO DIC_CODE(CODE_GROUP, CODE, CODE_NAME)" + CommConstants.sqlCR);
-        sql.append("VALUES('MY', 'MY000', 'MY 단어장')" + CommConstants.sqlCR);
+        sql.append("VALUES('MY', 'MY0000', 'MY 단어장')" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
         db.execSQL(sql.toString());
     }
@@ -265,6 +265,22 @@ public class DicDb {
         StringBuffer sql = new StringBuffer();
         sql.append("INSERT INTO DIC_CODE(CODE_GROUP, CODE, CODE_NAME, UPD_DATE, W_CNT, S_CNT, BOOKMARK_CNT) " + CommConstants.sqlCR);
         sql.append("VALUES ('" + codeGroup + "','" + code + "','" + codeName + "','" + updDate + "'," + wCnt + ",0," + bookmarkCnt + ")" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void patch1(SQLiteDatabase db) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("UPDATE DIC_CODE" + CommConstants.sqlCR);
+        sql.append("SET    CODE = 'MY0000' " + CommConstants.sqlCR);
+        sql.append("WHERE  CODE = 'MY000' " + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+
+        sql.delete(0, sql.length());
+        sql.append("UPDATE DIC_VOC" + CommConstants.sqlCR);
+        sql.append("SET    KIND = 'MY0000' " + CommConstants.sqlCR);
+        sql.append("WHERE  KIND = 'MY000' " + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
         db.execSQL(sql.toString());
     }

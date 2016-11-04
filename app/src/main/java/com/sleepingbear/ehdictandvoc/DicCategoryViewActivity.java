@@ -314,8 +314,8 @@ class DicCategoryViewCursorAdapter extends CursorAdapter {
                         DicDb.delDicVocAll(mDb, viewHolder.entryId);
                         DicUtils.writeInfoToFile(mActivity, "MYWORD_DELETE_ALL" + ":" + viewHolder.entryId);
                     } else {
-                        DicDb.insDicVoc(mDb, viewHolder.entryId, "MY000");
-                        DicUtils.writeInfoToFile(mActivity, "MYWORD_INSERT" + ":" + "MY000" + ":" + DicUtils.getDelimiterDate(DicUtils.getCurrentDate(), ".") + ":" + viewHolder.entryId);
+                        DicDb.insDicVoc(mDb, viewHolder.entryId, "MY0000");
+                        DicUtils.writeInfoToFile(mActivity, "MYWORD_INSERT" + ":" + "MY0000" + ":" + DicUtils.getDelimiterDate(DicUtils.getCurrentDate(), ".") + ":" + viewHolder.entryId);
                     }
 
                     dataChange();

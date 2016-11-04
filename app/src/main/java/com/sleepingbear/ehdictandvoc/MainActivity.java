@@ -188,16 +188,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-		/*
-        String flag_other = "other_20161009";
+        String flag_other = "other_20161104";
         if ( "N".equals(prefs.getString(flag_other, "N")) ) {
-            DicUtils.writeNewInfoToFile(this, db);
+            DicDb.patch1(db);
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(flag_other, "Y");
             editor.commit();
         };
-		*/
 
 		checkPermission();
     }
