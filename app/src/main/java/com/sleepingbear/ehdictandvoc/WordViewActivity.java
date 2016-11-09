@@ -177,10 +177,12 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         sql.append("  UNION  " + CommConstants.sqlCR);
         sql.append("SELECT 5 ORD1, 0 SEQ, 1 ORD2, '* 기타 예제' DATA1, '' DATA2 " + CommConstants.sqlCR);
         sql.append(" UNION   " + CommConstants.sqlCR);
-        sql.append("SELECT 6 ORD1, SEQ, 1 ORD2, SENTENCE1, SENTENCE2 " + CommConstants.sqlCR);
-        sql.append("  FROM DIC_SAMPLE " + CommConstants.sqlCR);
-        sql.append(" WHERE (SENTENCE1 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "')  " + CommConstants.sqlCR);
-        sql.append("        OR SENTENCE2 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "'))  " + CommConstants.sqlCR);
+        sql.append("SELECT * FROM (   " + CommConstants.sqlCR);
+        sql.append("    SELECT 6 ORD1, SEQ, 1 ORD2, SENTENCE1, SENTENCE2 " + CommConstants.sqlCR);
+        sql.append("    FROM   DIC_SAMPLE " + CommConstants.sqlCR);
+        sql.append("    WHERE  (SENTENCE1 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "')  " + CommConstants.sqlCR);
+        sql.append("             OR SENTENCE2 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "'))  " + CommConstants.sqlCR);
+        sql.append(" LIMIT 400 )  " + CommConstants.sqlCR);
         sql.append("ORDER BY 1,2,3  " + CommConstants.sqlCR);
         Log.i("vhDictAndVoc", sql.toString());
         Cursor dicViewCursor = db.rawQuery(sql.toString(), null);
