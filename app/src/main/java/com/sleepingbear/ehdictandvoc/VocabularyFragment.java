@@ -64,9 +64,9 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
         AdRequest adRequest =new  AdRequest.Builder().build();
         av.loadAd(adRequest);
 
-        ((Button) mainView.findViewById(R.id.my_f_dic_b_1)).setOnClickListener(this);
-        ((Button) mainView.findViewById(R.id.my_f_dic_b_2)).setOnClickListener(this);
-        ((Button) mainView.findViewById(R.id.my_f_dic_b_3)).setOnClickListener(this);
+        ((Button) mainView.findViewById(R.id.my_f_voc_b_1)).setOnClickListener(this);
+        ((Button) mainView.findViewById(R.id.my_f_voc_b_2)).setOnClickListener(this);
+        ((Button) mainView.findViewById(R.id.my_f_voc_b_3)).setOnClickListener(this);
 
         return mainView;
     }
@@ -76,7 +76,7 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
 
         Cursor cursor = mDb.rawQuery(DicQuery.getVocabularyCategoryCount(), null);
 
-        ListView listView = (ListView) mainView.findViewById(R.id.my_a_cat_lv_category);
+        ListView listView = (ListView) mainView.findViewById(R.id.my_f_voc_lv_category);
         adapter = new VocabularyFlagmentCursorAdapter(getContext(), cursor, 0, this, mDb, getFragmentManager(), mScreenKind);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -300,13 +300,13 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if ( v.getId() == R.id.my_f_dic_b_1 ) {
+        if ( v.getId() == R.id.my_f_voc_b_1 ) {
             Intent intent = new Intent(this.getActivity().getApplication(), MySampleActivity.class);
             startActivity(intent);
-        } else  if ( v.getId() == R.id.my_f_dic_b_2 ) {
+        } else  if ( v.getId() == R.id.my_f_voc_b_2 ) {
             Intent intent = new Intent(this.getActivity().getApplication(), DicCategoryActivity.class);
             getActivity().startActivityForResult(intent, CommConstants.a_dicCategory);
-        } else if ( v.getId() == R.id.my_f_dic_b_3 ) {
+        } else if ( v.getId() == R.id.my_f_voc_b_3 ) {
             Intent intent = new Intent(this.getActivity().getApplication(), StudyActivity.class);
             startActivity(intent);
         }

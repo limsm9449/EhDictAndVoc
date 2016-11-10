@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ( keyCode == KeyEvent.KEYCODE_ENTER ) {
-                    changeListView();
+                    changeListView(true);
                 }
 
                 return false;
@@ -80,7 +81,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 et_search.setText("");
 
-                changeListView();
+                changeListView(true);
             }
         });
 
@@ -102,21 +103,27 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setOnClickListener(this);
         ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setVisibility(View.GONE);
 
-        changeListView();
+        changeListView(false);
 
         AdView av = (AdView)mainView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         av.loadAd(adRequest);
 
+        et_search.requestFocus();
+
         return mainView;
     }
 
-    public void changeListView() {
-        if ( task != null ) {
-            return;
+    public void changeListView(boolean isKeyin) {
+        if ( isKeyin ) {
+            ((RelativeLayout)mainView.findViewById(R.id.my_f_dic_rl_msg)).setVisibility(View.GONE);
+
+            if (task != null) {
+                return;
+            }
+            task = new DicSearchTask();
+            task.execute();
         }
-        task = new DicSearchTask();
-        task.execute();
     }
 
     public void getData() {
@@ -216,7 +223,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         dictionaryListView.setSelection(0);
 
         //소프트 키보드 없애기
-        InputMethodManager imm= (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(et_search.getWindowToken(), 0);
     }
 
@@ -275,17 +282,17 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setVisibility(View.GONE);
             mVhKind = "A";
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_f ) {
             ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setVisibility(View.VISIBLE);
             mVhKind = "F";
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_h ) {
             ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setVisibility(View.GONE);
             mVhKind = "H";
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_word ) {
             mWsKind = "W";
 
@@ -297,7 +304,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             RadioGroup rg = (RadioGroup) mainView.findViewById(R.id.my_f_dic_rg_vhKind);
             rg.setVisibility(View.VISIBLE);
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_sentence ) {
             ((CheckBox) mainView.findViewById(R.id.my_f_dic_cb_word)).setVisibility(View.GONE);
             mWsKind = "S";
@@ -305,9 +312,9 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             RadioGroup rg = (RadioGroup) mainView.findViewById(R.id.my_f_dic_rg_vhKind);
             rg.setVisibility(View.GONE);
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_cb_word ) {
-            changeListView();
+            changeListView(true);
         }
     }
 

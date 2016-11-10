@@ -182,7 +182,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         sql.append("    FROM   DIC_SAMPLE " + CommConstants.sqlCR);
         sql.append("    WHERE  (SENTENCE1 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "')  " + CommConstants.sqlCR);
         sql.append("             OR SENTENCE2 LIKE (SELECT '%'||WORD||'%' FROM DIC WHERE ENTRY_ID = '" + entryId + "'))  " + CommConstants.sqlCR);
-        sql.append(" LIMIT 400 )  " + CommConstants.sqlCR);
+        sql.append(" LIMIT 300 )  " + CommConstants.sqlCR);
         sql.append("ORDER BY 1,2,3  " + CommConstants.sqlCR);
         Log.i("vhDictAndVoc", sql.toString());
         Cursor dicViewCursor = db.rawQuery(sql.toString(), null);

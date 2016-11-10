@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sleepingbear.ehdictandvoc.VocabularyFragment"
-    android:id="@+id/my_f_cat_fl_content"
+    android:id="@+id/my_f_voc_fl_content"
     android:background="@android:color/white"
     android:descendantFocusability="blocksDescendants" >
 
@@ -16,12 +16,12 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/my_f_dic_ll_btn">
+            android:id="@+id/my_f_voc_ll_btn">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_f_dic_b_1"
+                android:id="@+id/my_f_voc_b_1"
                 android:background="@drawable/my_button"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
@@ -37,7 +37,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_f_dic_b_2"
+                android:id="@+id/my_f_voc_b_2"
                 android:background="@drawable/my_button"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="0dp"
@@ -53,7 +53,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_f_dic_b_3"
+                android:id="@+id/my_f_voc_b_3"
                 android:background="@drawable/my_button"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="0dp"
@@ -65,6 +65,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="단어 학습" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +74,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="false"
             android:layout_above="@+id/adView"
-            android:id="@+id/my_f_dic_ll_content"
-            android:layout_below="@+id/my_f_dic_ll_btn">
+            android:id="@+id/my_f_voc_ll_content"
+            android:layout_below="@+id/my_f_voc_ll_btn">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -87,7 +88,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_a_cat_lv_category"
+                android:id="@+id/my_f_voc_lv_category"
                 android:layout_gravity="center_horizontal"
                 android:divider="@color/my_divider"
                 android:dividerHeight="0.5dp" />
@@ -109,6 +110,7 @@
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id"
             android:layout_alignParentBottom="true" />
+
     </RelativeLayout>
 
 </FrameLayout>
