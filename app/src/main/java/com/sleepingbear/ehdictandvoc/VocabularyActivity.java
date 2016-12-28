@@ -448,13 +448,9 @@ class VocabularyCursorAdapter extends CursorAdapter {
         viewHolder.memorizationCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap hm = (HashMap) v.getTag();
-                String entryId = (String) hm.get("entryId");
+                ViewHolder viewHolder = (ViewHolder)v.getTag();
 
-                DicDb.updMemory(mDb, entryId, (((CheckBox) v.findViewById(R.id.my_cb_memory_check)).isChecked() ? "Y" : "N"));
-
-                //기록...
-                DicUtils.writeInfoToFile(context, "MEMORY" + ":" + entryId + ":" + (((CheckBox) v.findViewById(R.id.my_cb_memory_check)).isChecked() ? "Y" : "N"));
+                DicDb.updMemory(mDb, viewHolder.entryId, (((CheckBox) v).isChecked() ? "Y" : "N"));
 
                 dataChange();
             }
