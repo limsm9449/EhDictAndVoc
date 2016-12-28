@@ -147,39 +147,6 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemClickListener(itemClickListener);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cur = (Cursor) adapter.getItem(position);
-                final String entryId = cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID"));
-
-                new android.app.AlertDialog.Builder(VocabularyActivity.this)
-                    .setTitle("알림")
-                    .setMessage("삭제하시겠습니까?")
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            DicDb.delDicVoc(db, entryId, kind);
-                            DicUtils.writeInfoToFile(getApplicationContext(), "MYWORD_DELETE" + ":" + kind + ":" + entryId);
-
-                            adapter.dataChange();
-
-							isChange = true;
-
-                            Toast.makeText(getApplicationContext(), "단어장을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .show();
-
-                return true;
-            };
-        });
-
         listView.setSelection(0);
     }
 
