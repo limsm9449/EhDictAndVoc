@@ -125,6 +125,7 @@
         <activity
             android:name=".Study6Activity"
             android:label="@string/title_activity_study6"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
