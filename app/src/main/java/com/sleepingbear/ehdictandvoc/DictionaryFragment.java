@@ -81,7 +81,11 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 et_search.setText("");
 
-                changeListView(true);
+                et_search.requestFocus();
+
+                //키보드 보이게 하는 부분
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
 
