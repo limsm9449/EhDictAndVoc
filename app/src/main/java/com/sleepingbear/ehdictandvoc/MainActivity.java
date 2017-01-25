@@ -502,10 +502,3 @@ class MainPagerAdapter extends FragmentPagerAdapter {
     }
 }
 
-
-/*
-//소프트 키보드 없애기
-   InputMethodManager imm= (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-   imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-
- */

@@ -80,7 +80,6 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         iv_clear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 et_search.setText("");
-
                 et_search.requestFocus();
 
                 //키보드 보이게 하는 부분
@@ -113,7 +112,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         AdRequest adRequest = new AdRequest.Builder().build();
         av.loadAd(adRequest);
 
-        et_search.requestFocus();
+        //et_search.requestFocus();
 
         return mainView;
     }
