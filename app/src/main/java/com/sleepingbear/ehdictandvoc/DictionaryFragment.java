@@ -299,7 +299,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
 
             dlg.show();
 
-            return false;
+            return true;
         }
     };
 
