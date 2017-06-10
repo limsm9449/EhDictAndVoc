@@ -1,23 +1,17 @@
 package com.sleepingbear.ehdictandvoc;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.OnInitListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +24,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -39,9 +32,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-
-import java.util.Arrays;
-import java.util.Locale;
 
 public class WordViewActivity extends AppCompatActivity implements View.OnClickListener {
     private DbHelper dbHelper;
@@ -95,7 +85,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void getWordInfo() {
-        Cursor wordCursor = db.rawQuery(" SELECT SEQ _id, WORD, MEAN, ENTRY_ID, KIND, SPELLING, TENSE, TYPE, (SELECT COUNT(*) FROM DIC_VOC WHERE ENTRY_ID = '" + entryId + "') MY_VOC FROM DIC WHERE ENTRY_ID = '" + entryId + "'", null);
+        Cursor wordCursor = db.rawQuery(DicQuery.getVocDetailForEntryId(entryId), null);
         if ( wordCursor.moveToNext() ) {
             word = wordCursor.getString(wordCursor.getColumnIndexOrThrow("WORD"));
             kind = wordCursor.getString(wordCursor.getColumnIndexOrThrow("KIND"));
@@ -198,7 +188,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
 
     public void webDictionaryLoad() {
         String url = "";
-        if ( kind.equals("F") ) {
+        if ( kind.equals(CommConstants.dictionaryKind_f) ) {
             if ("Naver".equals(site)) {
                 url = "http://endic.naver.com/search.nhn?sLn=kr&searchOption=entry_idiom&query=" + word;
             } else if ("Daum".equals(site)) {
@@ -224,7 +214,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
             finish();
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
-            bundle.putString("SCREEN", "WORDVIEW");
+            bundle.putString("SCREEN", CommConstants.screen_wordView);
 
             Intent intent = new Intent(getApplication(), HelpActivity.class);
             intent.putExtras(bundle);
@@ -280,8 +270,12 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
 }
 
 class WordViewActivityCursorAdapter extends CursorAdapter {
+    int fontSize = 0;
+
     public WordViewActivityCursorAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, 0);
+
+        fontSize = Integer.parseInt( DicUtils.getPreferencesValue( context, CommConstants.preferences_font ) );
     }
 
     @Override
@@ -300,5 +294,8 @@ class WordViewActivityCursorAdapter extends CursorAdapter {
         tv_foriegn.setText((cursor.getPosition() + 1) + ". " + sentence1);
         tv_han.setText("   " + sentence2);
 
+        //사이즈 설정
+        tv_foriegn.setTextSize(fontSize);
+        tv_han.setTextSize(fontSize);
     }
 }

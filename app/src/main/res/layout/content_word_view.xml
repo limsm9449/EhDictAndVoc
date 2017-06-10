@@ -6,13 +6,12 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_word_view"
     tools:context="com.sleepingbear.ehdictandvoc.WordViewActivity">
-
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/my_wv"
         android:layout_alignParentBottom="false"
-        android:layout_above="@+id/adView">
+        android:layout_above="@+id/adView" >
     </WebView>
 
     <LinearLayout
@@ -22,8 +21,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/my_wv_ll_top"
-        android:layout_above="@+id/adView">
+        android:layout_above="@+id/adView"
+        android:id="@+id/my_wv_ll_top">
 
         <LinearLayout
             android:orientation="horizontal"

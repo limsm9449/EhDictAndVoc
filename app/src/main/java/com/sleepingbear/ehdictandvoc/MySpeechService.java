@@ -2,18 +2,14 @@ package com.sleepingbear.ehdictandvoc;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.TimerTask;
 
 public class MySpeechService extends Service implements TextToSpeech.OnInitListener {
 

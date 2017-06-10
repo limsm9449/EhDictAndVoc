@@ -31,8 +31,6 @@ import java.util.Random;
 public class Study4Activity extends AppCompatActivity implements View.OnClickListener {
     private String mVocKind;
     private String mMemorization;
-    private String mFromDate;
-    private String mToDate;
 
     private String mWordMean;
 
@@ -71,8 +69,6 @@ public class Study4Activity extends AppCompatActivity implements View.OnClickLis
         Bundle b = this.getIntent().getExtras();
         mVocKind = b.getString("vocKind");
         mMemorization = b.getString("memorization");
-        mFromDate = b.getString("fromDate");
-        mToDate = b.getString("toDate");
         mWordMean = "WORD";
 
         ActionBar ab = (ActionBar) getSupportActionBar();
@@ -109,6 +105,13 @@ public class Study4Activity extends AppCompatActivity implements View.OnClickLis
         tv_pos.setText("0");
         tv_total = (TextView) findViewById(R.id.my_a_study4_tv_total);
         tv_total.setText("0");
+
+        int fontSize = Integer.parseInt( DicUtils.getPreferencesValue( this, CommConstants.preferences_font ) );
+        tv_question.setTextSize(fontSize);
+        tv_spelling.setTextSize(fontSize);
+        tv_answer.setTextSize(fontSize);
+        tv_o_cnt.setTextSize(fontSize);
+        tv_x_cnt.setTextSize(fontSize);
 
         if ( "".equals(mMemorization) ) {
             ((RadioButton) findViewById(R.id.my_a_study4_rb_all)).setChecked(true);
@@ -168,8 +171,6 @@ public class Study4Activity extends AppCompatActivity implements View.OnClickLis
         if (mMemorization.length() == 1) {
             sql.append("   AND A.MEMORIZATION = '" + mMemorization + "' " + CommConstants.sqlCR);
         }
-        sql.append("   AND A.INS_DATE >= '" + mFromDate + "' " + CommConstants.sqlCR);
-        sql.append("   AND A.INS_DATE <= '" + mToDate + "' " + CommConstants.sqlCR);
         sql.append(" ORDER BY A.RANDOM_SEQ" + CommConstants.sqlCR);
         mCursor = db.rawQuery(sql.toString(), null);
         if ( mCursor.getCount() > 0 ) {
@@ -423,7 +424,7 @@ public class Study4Activity extends AppCompatActivity implements View.OnClickLis
             finish();
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
-            bundle.putString("SCREEN", "STUDY4");
+            bundle.putString("SCREEN", CommConstants.screen_study4);
 
             Intent intent = new Intent(getApplication(), HelpActivity.class);
             intent.putExtras(bundle);

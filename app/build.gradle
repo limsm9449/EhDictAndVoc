@@ -8,8 +8,8 @@ android {
         applicationId "com.sleepingbear.ehdictandvoc"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 11
-        versionName "1.0.11"
+        versionCode 12
+        versionName "1.0.12"
     }
     buildTypes {
         release {
@@ -27,6 +27,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile files('libs/microsoft-translator-java-api-0.6.2-jar-with-dependencies.jar')
     compile files('libs/jsoup-1.7.2.jar')
 }

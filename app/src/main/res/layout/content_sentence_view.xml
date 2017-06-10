@@ -26,14 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/my_c_sv_ib_tts">
+                android:layout_toLeftOf="@+id/my_ib_tts">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Foriegn Sentence"
-                    android:id="@+id/my_c_sv_tv_foreign"
-                    android:textColor="#e65a5a"
+                    android:id="@+id/my_tv_foreign"
+                    android:textColor="@color/my_text_word"
                     android:textSize="15dp"
                     android:textIsSelectable="true"
                     android:layout_marginLeft="10dp" />
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Han Sentence"
-                    android:id="@+id/my_c_sv_tv_han"
+                    android:id="@+id/my_tv_han"
                     android:layout_marginLeft="10dp"
                     android:textColor="#4f8ead"
                     android:textSize="13dp"
@@ -54,19 +54,19 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_c_sv_ib_tts"
-                android:src="@mipmap/ic_record_voice_over_black_24dp"
+                android:id="@+id/my_ib_tts"
+                android:src="@drawable/ic_record_voice_over_black_24dp"
                 android:background="@android:color/transparent"
                 android:textAlignment="center"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/my_c_sv_ib_mysample"
+                android:layout_toLeftOf="@+id/my_ib_mysample"
                 android:layout_marginLeft="10dp"
                 android:foregroundGravity="center_vertical" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_c_sv_ib_mysample"
+                android:id="@+id/my_ib_mysample"
                 android:layout_alignParentLeft="false"
                 android:foregroundGravity="center_vertical"
                 android:src="@android:drawable/star_off"
@@ -79,15 +79,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/my_dividerL"
+            android:background="@color/my_divider"
             android:layout_alignParentTop="true"
-            android:layout_above="@+id/my_a_cat_lv_category"
+            android:layout_above="@+id/my_a_lv"
             android:layout_marginTop="5dp" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/my_c_sv_lv_list"
+            android:id="@+id/my_lv"
             android:divider="@color/my_divider"
             android:dividerHeight="0.5dp"
             android:background="@android:color/background_light" />
@@ -98,7 +98,7 @@
             android:layout_height="0.5dp"
             android:background="@color/my_divider"
             android:layout_alignParentTop="true"
-            android:layout_above="@+id/my_a_cat_lv_category" />
+            android:layout_above="@+id/my_a_lv" />
 
     </LinearLayout>
 
