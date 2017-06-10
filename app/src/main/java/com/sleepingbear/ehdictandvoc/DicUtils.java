@@ -94,9 +94,9 @@ public class DicUtils {
     }
 
     public static void dicSqlLog(String str) {
-        //if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Log.d(CommConstants.tag + " ====>", str);
-        //}
+        }
     }
 
     public static void dicLog(String str) {
@@ -254,7 +254,7 @@ public class DicUtils {
             FileOutputStream fos = null;
 
             if ( "".equals(fileName) ) {
-                fos = ctx.openFileOutput(CommConstants.infoFileName, ctx.MODE_PRIVATE);
+                fos = ctx.openFileOutput(CommConstants.infoFileName, Context.MODE_PRIVATE);
             } else {
                 File saveFile = new File(fileName);
                 try {
@@ -289,11 +289,7 @@ public class DicUtils {
         boolean isHangule = false;
         String str = (pStr == null ? "" : pStr);
         try {
-            if(str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
-                isHangule = true;
-            } else {
-                isHangule = false;
-            }
+            isHangule = str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
         } catch (PatternSyntaxException e) {
             e.printStackTrace();
         }
@@ -419,11 +415,7 @@ public class DicUtils {
         boolean isWifiAvailable = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isAvailable();
         boolean isWifiConnect = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 
-        if ((isWifiAvailable && isWifiConnect) || (isMobileAvailable && isMobileConnect)){
-            return true;
-        }else{
-            return false;
-        }
+        return (isWifiAvailable && isWifiConnect) || (isMobileAvailable && isMobileConnect);
     }
 
     public static String getBtnString(String word){
