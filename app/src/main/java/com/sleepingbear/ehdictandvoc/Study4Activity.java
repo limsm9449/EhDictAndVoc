@@ -71,23 +71,23 @@ public class Study4Activity extends AppCompatActivity implements View.OnClickLis
         mMemorization = b.getString("memorization");
         mWordMean = "WORD";
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("studyKindName"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        ((RadioButton) findViewById(R.id.my_a_study4_rb_all)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_a_study4_rb_m)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_a_study4_rb_m_not)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_a_study4_rb_word)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_a_study4_rb_mean)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_a_study4_b_random)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_a_study4_b_o)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_a_study4_b_x)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.my_a_study4_ib_first)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.my_a_study4_ib_prev)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.my_a_study4_ib_next)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.my_a_study4_ib_last)).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_rb_all).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_rb_m).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_rb_m_not).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_rb_word).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_rb_mean).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_b_random).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_b_o).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_b_x).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_ib_first).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_ib_prev).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_ib_next).setOnClickListener(this);
+        findViewById(R.id.my_a_study4_ib_last).setOnClickListener(this);
 
         tv_question = (TextView) findViewById(R.id.my_a_study4_tv_question);
         tv_question.setText("");

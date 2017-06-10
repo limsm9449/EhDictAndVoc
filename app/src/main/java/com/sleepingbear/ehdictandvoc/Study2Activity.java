@@ -60,7 +60,7 @@ public class Study2Activity extends AppCompatActivity implements View.OnClickLis
         mMemorization = b.getString("memorization");
         mWordMean = "WORD";
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("studyKindName"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);

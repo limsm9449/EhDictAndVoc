@@ -53,31 +53,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("db_new", "N");
             editor.commit();
-        };
+        }
 
         checkPermission();
 
-        ((Button) findViewById(R.id.my_b_foreign_dic)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_dic_history)).setOnClickListener(this);
+        findViewById(R.id.my_b_foreign_dic).setOnClickListener(this);
+        findViewById(R.id.my_b_dic_history).setOnClickListener(this);
 
-        ((Button) findViewById(R.id.my_b_web_translate)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_web_dic)).setOnClickListener(this);
+        findViewById(R.id.my_b_web_translate).setOnClickListener(this);
+        findViewById(R.id.my_b_web_dic).setOnClickListener(this);
 
-        ((Button) findViewById(R.id.my_b_news)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_news_word)).setOnClickListener(this);
+        findViewById(R.id.my_b_news).setOnClickListener(this);
+        findViewById(R.id.my_b_news_word).setOnClickListener(this);
 
-        ((Button) findViewById(R.id.my_b_conversation_study)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_pattern)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_conv_search)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_conv_note)).setOnClickListener(this);
+        findViewById(R.id.my_b_conversation_study).setOnClickListener(this);
+        findViewById(R.id.my_b_pattern).setOnClickListener(this);
+        findViewById(R.id.my_b_conv_search).setOnClickListener(this);
+        findViewById(R.id.my_b_conv_note).setOnClickListener(this);
 
-        ((Button) findViewById(R.id.my_b_idiom)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_naver_conv)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_daum)).setOnClickListener(this);
+        findViewById(R.id.my_b_idiom).setOnClickListener(this);
+        findViewById(R.id.my_b_naver_conv).setOnClickListener(this);
+        findViewById(R.id.my_b_daum).setOnClickListener(this);
 
-        ((Button) findViewById(R.id.my_b_today)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_voc)).setOnClickListener(this);
-        ((Button) findViewById(R.id.my_b_voc_study)).setOnClickListener(this);
+        findViewById(R.id.my_b_today).setOnClickListener(this);
+        findViewById(R.id.my_b_voc).setOnClickListener(this);
+        findViewById(R.id.my_b_voc_study).setOnClickListener(this);
 
         AdView av = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();

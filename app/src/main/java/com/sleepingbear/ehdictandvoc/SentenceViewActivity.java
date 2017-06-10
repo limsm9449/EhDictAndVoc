@@ -56,7 +56,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("문장 상세");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -189,7 +189,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
                 dlg.show();
 
                 return true;
-            };
+            }
         });
     }
 

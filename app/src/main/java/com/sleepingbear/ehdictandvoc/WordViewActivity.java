@@ -55,7 +55,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -90,7 +90,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
             word = wordCursor.getString(wordCursor.getColumnIndexOrThrow("WORD"));
             kind = wordCursor.getString(wordCursor.getColumnIndexOrThrow("KIND"));
 
-            ActionBar ab = (ActionBar) getSupportActionBar();
+            ActionBar ab = getSupportActionBar();
             ab.setTitle(word + " 검색");
         }
         wordCursor.close();

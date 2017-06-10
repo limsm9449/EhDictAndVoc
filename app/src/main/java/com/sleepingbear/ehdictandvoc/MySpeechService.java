@@ -68,12 +68,8 @@ public class MySpeechService extends Service implements TextToSpeech.OnInitListe
         if (status == TextToSpeech.SUCCESS) {
             int result = ttsEn.setLanguage(Locale.US);
             int result2 = ttsKr.setLanguage(Locale.KOREA);
-            if (result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED &&
-                    result2 != TextToSpeech.LANG_MISSING_DATA && result2 != TextToSpeech.LANG_NOT_SUPPORTED ) {
-                isInit = true;
-            } else {
-                isInit = false;
-            }
+            isInit = result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED &&
+                    result2 != TextToSpeech.LANG_MISSING_DATA && result2 != TextToSpeech.LANG_NOT_SUPPORTED;
 
             if ( isInit == true ) {
                 if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 ){
