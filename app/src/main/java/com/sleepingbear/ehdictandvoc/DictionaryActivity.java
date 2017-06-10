@@ -66,7 +66,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -114,11 +114,11 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             changeListView(false);
         }
 
-        ((RadioButton) findViewById(R.id.my_rb_word)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_rb_sentence)).setOnClickListener(this);
-        ((CheckBox) findViewById(R.id.my_cb_word)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_web)).setOnClickListener(this);
-        ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.GONE);
+        findViewById(R.id.my_rb_word).setOnClickListener(this);
+        findViewById(R.id.my_rb_sentence).setOnClickListener(this);
+        findViewById(R.id.my_cb_word).setOnClickListener(this);
+        findViewById(R.id.my_iv_web).setOnClickListener(this);
+        findViewById(R.id.my_dictionary_rl_web).setVisibility(View.GONE);
 
         AdView av = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -176,7 +176,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
 
     public void changeListView(boolean isKeyin) {
         if ( isKeyin ) {
-            ((RelativeLayout)findViewById(R.id.my_dictionary_rl_msg)).setVisibility(View.GONE);
+            findViewById(R.id.my_dictionary_rl_msg).setVisibility(View.GONE);
 
             if (task != null) {
                 return;
@@ -200,7 +200,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                     sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND" + CommConstants.sqlCR);
                     sql.append("  FROM DIC" + CommConstants.sqlCR);
                     sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
-                    if (((CheckBox) findViewById(R.id.my_cb_word)).isChecked()) {
+                    if (((CheckBox) findViewById(R.id.my_cb_word)).isChecked() && !DicUtils.isHangule(searchText) ) {
                         sql.append("   AND SPELLING != ''" + CommConstants.sqlCR);
                     }
                     sql.append(" AND ( WORD LIKE '" + searchText + "%' OR WORD IN (SELECT WORD FROM DIC_TENSE WHERE WORD_TENSE = '" + searchText + "') )" + CommConstants.sqlCR);
@@ -266,9 +266,9 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         } else {
             if (cursor.getCount() == 0) {
                 Toast.makeText(this, "검색된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
-                ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_dictionary_rl_web).setVisibility(View.VISIBLE);
             } else {
-                ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.GONE);
+                findViewById(R.id.my_dictionary_rl_web).setVisibility(View.GONE);
             }
 
             ListView dictionaryListView = (ListView) findViewById(R.id.my_lv);
@@ -391,7 +391,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                 dlg.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Cursor cur = (Cursor) adapter.getCursor();
+                        Cursor cur = adapter.getCursor();
                         DicDb.insDicVoc(db, cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")), kindCodes[dSelect]);
                         DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
                     }
@@ -536,7 +536,7 @@ class DictionaryActivityCursorAdapter extends CursorAdapter {
                 ((TextView) view.findViewById(R.id.my_tv_spelling)).setText(spelling);
             }
         } else {
-            ((TextView) view.findViewById(R.id.my_tv_spelling)).setVisibility(View.GONE);
+            view.findViewById(R.id.my_tv_spelling).setVisibility(View.GONE);
 
             ((TextView) view.findViewById(R.id.my_tv_foreign)).setText(String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1"))));
             ((TextView) view.findViewById(R.id.my_tv_mean)).setText(String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE2"))));
