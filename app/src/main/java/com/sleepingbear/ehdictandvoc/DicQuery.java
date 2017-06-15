@@ -3,6 +3,9 @@ package com.sleepingbear.ehdictandvoc;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DicQuery {
 
     public static String getWriteData() {
@@ -678,6 +681,17 @@ public class DicQuery {
         sql.append("FROM    DIC_SAMPLE" + CommConstants.sqlCR);
         sql.append("WHERE   SENTENCE1 LIKE '" + idiom + "'" + CommConstants.sqlCR);
         sql.append("ORDER   BY ORD" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
+    public static String getNovelList(String kind) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT  SEQ _id, TITLE, URL" + CommConstants.sqlCR);
+        sql.append("FROM    DIC_NOVEL" + CommConstants.sqlCR);
+        sql.append("WHERE   KIND = '" + kind + "'" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
 
         return sql.toString();

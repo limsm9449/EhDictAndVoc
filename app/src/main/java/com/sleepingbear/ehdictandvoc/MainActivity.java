@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.my_b_web_dic).setOnClickListener(this);
 
         findViewById(R.id.my_b_news).setOnClickListener(this);
+        findViewById(R.id.my_b_novel).setOnClickListener(this);
         findViewById(R.id.my_b_news_word).setOnClickListener(this);
 
         findViewById(R.id.my_b_conversation_study).setOnClickListener(this);
@@ -162,6 +163,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent newsIntent = new Intent(getApplication(), NewsActivity.class);
                 newsIntent.putExtras(bundle);
                 startActivity(newsIntent);
+
+                break;
+            case R.id.my_b_novel:
+                Intent novelIntent = new Intent(getApplication(), NovelActivity.class);
+                novelIntent.putExtras(bundle);
+                startActivity(novelIntent);
 
                 break;
             case R.id.my_b_news_word:

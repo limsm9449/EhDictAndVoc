@@ -84,12 +84,22 @@
             android:layout_marginBottom="5dp">
 
             <Button
-                android:text="영한 뉴스"
+                android:text="영어 뉴스"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/my_b_news"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
+                android:layout_marginRight="3dp" />
+
+            <Button
+                android:text="영어 소설"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/my_b_novel"
+                android:background="@drawable/my_button"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button

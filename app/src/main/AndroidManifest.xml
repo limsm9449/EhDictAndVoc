@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -163,11 +162,19 @@
         <activity
             android:name=".IdiomViewActivity"
             android:label="@string/title_activity_idiom_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TodayActivity"
             android:label="@string/title_activity_today"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NovelActivity"
+            android:label="@string/title_activity_novel"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NovelViewActivity"
+            android:label="@string/title_activity_novel_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -37,6 +37,8 @@
     <string name="title_activity_idiom">숙어</string>
     <string name="title_activity_idiom_view">숙어 예제</string>
     <string name="title_activity_today">오늘의 단어</string>
+    <string name="title_activity_novel">영어소설</string>
+    <string name="title_activity_novel_view">영어소설</string>
 
 
     <!-- action -->
@@ -59,6 +61,5 @@
     <string name="action_no_ad">광고 제거 어플(유료)</string>
 
     <!-- My -->
-    <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/1206594265</string>
-
+    <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/1510153469</string>
 </resources>
