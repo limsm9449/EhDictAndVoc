@@ -659,4 +659,39 @@ public class DicUtils {
 
         return sb.toString();
     }
+
+    public static String getMyNovelContent(String path) {
+        String content = "";
+        try {
+            FileInputStream fis = new FileInputStream(new File(path));
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+
+            String temp = "";
+            while( (temp = br.readLine()) != null) {
+                content += temp + "\n";
+            }
+
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                isr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        return content;
+    }
 }

@@ -697,4 +697,16 @@ public class DicQuery {
         return sql.toString();
     }
 
+    public static String getMyNovel() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT SEQ _id, SEQ, TITLE, PATH, INS_DATE" + CommConstants.sqlCR);
+        sql.append("FROM   DIC_MY_NOVEL" + CommConstants.sqlCR);
+        sql.append("ORDER  BY INS_DATE DESC" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
 }

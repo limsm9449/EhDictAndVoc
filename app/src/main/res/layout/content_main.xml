@@ -103,7 +103,7 @@
                 android:layout_marginRight="3dp" />
 
             <Button
-                android:text="뉴스 클릭 단어"
+                android:text="뉴스/소설\n클릭 단어"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/my_b_news_word"

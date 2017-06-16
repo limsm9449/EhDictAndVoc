@@ -561,4 +561,20 @@ public class DicDb {
 
         return rtn;
     }
+
+    public static void delMyNovel(SQLiteDatabase db, int seq) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("DELETE FROM DIC_MY_NOVEL " + CommConstants.sqlCR);
+        sql.append(" WHERE SEQ = " + seq + "" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void insMyNovel(SQLiteDatabase db, String title, String path) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("INSERT INTO DIC_MY_NOVEL (TITLE, PATH, INS_DATE)" + CommConstants.sqlCR);
+        sql.append("VALUES('" + title + "','" + path + "','" + DicUtils.getDelimiterDate(DicUtils.getCurrentDate(), ".") + "')" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
 }

@@ -1,5 +1,6 @@
 package com.sleepingbear.ehdictandvoc;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -154,6 +155,8 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             novelTitle = cur.getString(cur.getColumnIndexOrThrow("TITLE"));
             novelUrl = cur.getString(cur.getColumnIndexOrThrow("URL"));
 
+            novelPart = "";
+
             taskKind = "NOVEL_PART";
             task = new NovelTask();
             task.execute();
@@ -161,43 +164,39 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
     };
 
     public void showPart(int novelPartCount) {
-        if ( novelPartCount == 0 ) {
+        final int[] kindCodes = new int[novelPartCount];
+        final String[] kindCodeNames = new String[novelPartCount];
 
-        } else {
-            final int[] kindCodes = new int[novelPartCount];
-            final String[] kindCodeNames = new String[novelPartCount];
-
-            int idx = 0;
-            for (int i = 0; i < novelPartCount; i++) {
-                kindCodes[idx] = i;
-                kindCodeNames[idx] = "Part " + (i + 1);
-                idx++;
-            }
-
-            final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(NovelActivity.this);
-            dlg.setTitle("메뉴 선택");
-            dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface arg0, int arg1) {
-                    mSelect = arg1;
-                }
-            });
-            dlg.setNegativeButton("취소", null);
-            dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    taskKind = "NOVEL_CONTENT";
-                    novelPart = "" + (mSelect + 1);
-                    task = new NovelTask();
-                    task.execute();
-                }
-            });
-            dlg.show();
+        int idx = 0;
+        for (int i = 0; i < novelPartCount; i++) {
+            kindCodes[idx] = i;
+            kindCodeNames[idx] = "Part " + (i + 1);
+            idx++;
         }
+
+        final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(NovelActivity.this);
+        dlg.setTitle("메뉴 선택");
+        dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                mSelect = arg1;
+            }
+        });
+        dlg.setNegativeButton("취소", null);
+        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                taskKind = "NOVEL_CONTENT";
+                novelPart = "" + (mSelect + 1);
+                task = new NovelTask();
+                task.execute();
+            }
+        });
+        dlg.show();
     }
 
-    public void showContent(String novelContent) {
+    public void saveContent(String novelContent) {
         File file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[.]")[0] + novelPart + ".txt" );
         if ( !file.exists() ) {
             FileOutputStream fos = null;
@@ -213,45 +212,17 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        String content = "";
-        try {
-            FileInputStream fis = new FileInputStream(new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[.]")[0] + novelPart + ".txt"));
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+        String path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[.]")[0] + novelPart + ".txt";
 
-            String temp = "";
-            while( (temp = br.readLine()) != null) {
-                content += temp + "\n";
-            }
-
-            try {
-                fis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                isr.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        if ( !"".equals(novelPart) ) {
+            novelTitle = novelTitle + " Part " + novelPart;
         }
+        DicDb.insMyNovel(db, novelTitle, path);
 
-        Bundle bundle = new Bundle();
+        Intent resultIntent = new Intent();
+        setResult(Activity.RESULT_OK, resultIntent);
 
-        bundle.putString("novelTitle", novelTitle);
-        bundle.putString("content", DicUtils.getHtmlString(content));
-
-        Intent intent = new Intent(NovelActivity.this, NovelViewActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -304,7 +275,7 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             } else if ( taskKind.equals("NOVEL_PART") ) {
                 showPart(novelPartCount);
             } else if ( taskKind.equals("NOVEL_CONTENT") ) {
-                showContent(novelContent);
+                saveContent(novelContent);
             }
 
             super.onPostExecute(result);
