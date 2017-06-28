@@ -185,7 +185,7 @@ public class NewsWebViewActivity extends AppCompatActivity implements View.OnCli
 
         DicUtils.dicLog(currUrl);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         //ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
         ab.setTitle(currItem.getName());
         ab.setHomeButtonEnabled(true);
@@ -211,19 +211,21 @@ public class NewsWebViewActivity extends AppCompatActivity implements View.OnCli
         mean.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent = new Intent(getApplication(), WordViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("entryId", entryId);
-                intent.putExtras(bundle);
+                if ( entryId != null && !"".equals(entryId) ) {
+                    Intent intent = new Intent(getApplication(), WordViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("entryId", entryId);
+                    intent.putExtras(bundle);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
 
                 return false;
             }
         });
 
-        ((ImageButton) this.findViewById(R.id.my_c_webview_ib_add)).setOnClickListener(this);
-        ((ImageButton) this.findViewById(R.id.my_c_webview_ib_search)).setOnClickListener(this);
+        this.findViewById(R.id.my_c_webview_ib_add).setOnClickListener(this);
+        this.findViewById(R.id.my_c_webview_ib_search).setOnClickListener(this);
 
         webView = (WebView) this.findViewById(R.id.my_c_webview_wv);
         webView.getSettings().setJavaScriptEnabled(true);
