@@ -66,10 +66,6 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         entryId = b.getString("entryId");
         getWordInfo();
 
-        //상세정보, 예제 영역
-        detailLl = (LinearLayout) this.findViewById(R.id.my_wv_ll_top);
-        detailLl.setVisibility(View.GONE);
-
         //웹뷰 영역
         webView = (WebView) this.findViewById(R.id.my_wv);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -77,7 +73,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setWebViewClient(new WordViewActivity.MyWebViewClient());
 
-        webDictionaryLoad();
+        detailLl = (LinearLayout) this.findViewById(R.id.my_wv_ll_top);
 
         AdView av =(AdView)findViewById(R.id.adView);
         AdRequest adRequest = new  AdRequest.Builder().build();
@@ -181,7 +177,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        spinner.setSelection(0);
+        spinner.setSelection( Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_wordView ) ) );
 
         return true;
     }

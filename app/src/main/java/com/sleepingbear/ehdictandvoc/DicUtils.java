@@ -190,12 +190,12 @@ public class DicUtils {
         FileInputStream fis = null;
         try {
             //데이타 초기화
-            DicDb.initMyConversationNote(db);
-            DicDb.initConversationNote(db);
+            //DicDb.initMyConversationNote(db);
+            //DicDb.initConversationNote(db);
             DicDb.initVocabulary(db);
-            DicDb.initDicClickWord(db);
+            //DicDb.initDicClickWord(db);
             DicDb.initHistory(db);
-            DicDb.initMyNovel(db);
+            //DicDb.initMyNovel(db);
 
             if ( "".equals(fileName) ) {
                 fis = ctx.openFileInput(CommConstants.infoFileName);
@@ -224,16 +224,16 @@ public class DicUtils {
                     DicDb.updMemory(db, row[1], row[2]);
                 } else if ( row[0].equals(CommConstants.tag_code_ins) ) {
                     DicDb.insCode(db, row[1], row[2], row[3]);
-                } else if ( row[0].equals(CommConstants.tag_note_ins) ) {
-                    DicDb.insConversationToNote(db, row[1], row[2]);
+                //} else if ( row[0].equals(CommConstants.tag_note_ins) ) {
+                //    DicDb.insConversationToNote(db, row[1], row[2]);
                 } else if ( row[0].equals(CommConstants.tag_voc_ins) ) {
                     DicDb.insDicVoc(db, row[1], row[2], row[3], row[4]);
                 } else if ( row[0].equals(CommConstants.tag_history_ins) ) {
                     DicDb.insSearchHistory(db, row[1], row[2]);
-                } else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
-                    DicDb.insDicClickWord(db, row[1], row[2]);
-                } else if ( row[0].equals(CommConstants.tag_novel_ins) ) {
-                    DicDb.insMyNovel(db, row[1], row[2], row[3], row[4]);
+                //} else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
+                //    DicDb.insDicClickWord(db, row[1], row[2]);
+                //} else if ( row[0].equals(CommConstants.tag_novel_ins) ) {
+                //    DicDb.insMyNovel(db, row[1], row[2], row[3], row[4]);
                 }
 
                 readString = buffreader.readLine();
@@ -470,6 +470,8 @@ public class DicUtils {
         if ( "".equals( rtn ) ) {
             if ( preference.equals(CommConstants.preferences_font) ) {
                 rtn = "17";
+            } else if ( preference.equals(CommConstants.preferences_wordView) ) {
+                rtn = "0";
             } else if ( preference.equals(CommConstants.preferences_webViewFont) ) {
                 rtn = "3";
             } else {

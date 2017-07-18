@@ -85,6 +85,7 @@ public class HelpActivity extends AppCompatActivity {
             allSb.append(tempSb.toString());
         }
 
+        /*
         tempSb.delete(0, tempSb.length());
         tempSb.append("* 영한 뉴스" + CommConstants.sqlCR);
         tempSb.append("- 11개의 영문 뉴스가 있습니다. " + CommConstants.sqlCR);
@@ -316,6 +317,7 @@ public class HelpActivity extends AppCompatActivity {
         } else {
             allSb.append(tempSb.toString());
         }
+        */
 
         tempSb.delete(0, tempSb.length());
         tempSb.append("* 오늘의 단어" + CommConstants.sqlCR);

@@ -1,5 +1,6 @@
 package com.sleepingbear.ehdictandvoc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,15 +54,15 @@ public class DictionaryHistoryActivity extends AppCompatActivity implements View
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        ((ImageView) findViewById(R.id.my_iv_all)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_delete)).setOnClickListener(this);
+        findViewById(R.id.my_iv_all).setOnClickListener(this);
+        findViewById(R.id.my_iv_delete).setOnClickListener(this);
 
         editRl = (RelativeLayout) findViewById(R.id.my_dictionary_history_rl);
         editRl.setVisibility(View.GONE);
@@ -84,13 +85,13 @@ public class DictionaryHistoryActivity extends AppCompatActivity implements View
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        ((MenuItem)menu.findItem(R.id.action_edit)).setVisible(false);
-        ((MenuItem)menu.findItem(R.id.action_exit)).setVisible(false);
+        menu.findItem(R.id.action_edit).setVisible(false);
+        menu.findItem(R.id.action_exit).setVisible(false);
 
         if ( isEditing ) {
-            ((MenuItem)menu.findItem(R.id.action_exit)).setVisible(true);
+            menu.findItem(R.id.action_exit).setVisible(true);
         } else {
-            ((MenuItem)menu.findItem(R.id.action_edit)).setVisible(true);
+            menu.findItem(R.id.action_edit).setVisible(true);
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -142,12 +143,11 @@ public class DictionaryHistoryActivity extends AppCompatActivity implements View
                 Cursor cur = (Cursor) adapter.getItem(position);
                 final String word = cur.getString(cur.getColumnIndexOrThrow("WORD"));
 
-                Intent intent = new Intent(getApplication(), DictionaryActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("word", word);
-                intent.putExtras(bundle);
+                Intent resultData = new Intent();
+                resultData.putExtra("word", word);
+                setResult(Activity.RESULT_OK, resultData);
 
-                startActivity(intent);
+                finish();
             }
         }
     };
@@ -157,11 +157,7 @@ public class DictionaryHistoryActivity extends AppCompatActivity implements View
         DicUtils.dicLog("onClick");
         switch (v.getId()) {
             case R.id.my_iv_all :
-                if ( isAllCheck ) {
-                    isAllCheck = false;
-                } else {
-                    isAllCheck = true;
-                }
+                isAllCheck = !isAllCheck;
                 adapter.allCheck(isAllCheck);
                 break;
             case R.id.my_iv_delete :
@@ -281,9 +277,9 @@ class DictionaryHistoryCursorAdapter extends CursorAdapter {
         }
 
         if ( isEditing ) {
-            ((RelativeLayout) view.findViewById(R.id.my_dictionary_history_rl)).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.my_dictionary_history_rl).setVisibility(View.VISIBLE);
         } else {
-            ((RelativeLayout) view.findViewById(R.id.my_dictionary_history_rl)).setVisibility(View.GONE);
+            view.findViewById(R.id.my_dictionary_history_rl).setVisibility(View.GONE);
         }
     }
 

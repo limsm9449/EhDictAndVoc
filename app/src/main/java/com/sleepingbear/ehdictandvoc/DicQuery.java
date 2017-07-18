@@ -17,11 +17,6 @@ public class DicQuery {
         sql.append("   AND CODE NOT IN ('VOC0001','C010001')" + CommConstants.sqlCR);
 
         sql.append("UNION" + CommConstants.sqlCR);
-        sql.append("SELECT '" + CommConstants.tag_note_ins + "'||':'||CODE||':'||SAMPLE_SEQ WRITE_DATA " + CommConstants.sqlCR);
-        sql.append(" FROM DIC_NOTE" + CommConstants.sqlCR);
-        sql.append(" WHERE CODE IN (SELECT CODE FROM DIC_CODE WHERE CODE_GROUP IN ('C01','C02') )" + CommConstants.sqlCR);
-
-        sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_voc_ins + "'||':'||A.KIND||':'||A.ENTRY_ID||':'||A.INS_DATE||':'||A.MEMORIZATION WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_VOC A, DIC B" + CommConstants.sqlCR);
         sql.append(" WHERE A.ENTRY_ID = B.ENTRY_ID" + CommConstants.sqlCR);
@@ -30,6 +25,12 @@ public class DicQuery {
         sql.append("SELECT '" + CommConstants.tag_history_ins + "'||':'||SEQ||':'||WORD WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_SEARCH_HISTORY" + CommConstants.sqlCR);
 
+        /*
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT '" + CommConstants.tag_note_ins + "'||':'||CODE||':'||SAMPLE_SEQ WRITE_DATA " + CommConstants.sqlCR);
+        sql.append(" FROM DIC_NOTE" + CommConstants.sqlCR);
+        sql.append(" WHERE CODE IN (SELECT CODE FROM DIC_CODE WHERE CODE_GROUP IN ('C01','C02') )" + CommConstants.sqlCR);
+
         sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_click_word_ins + "'||':'||ENTRY_ID||':'||INS_DATE WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_CLICK_WORD" + CommConstants.sqlCR);
@@ -37,6 +38,7 @@ public class DicQuery {
         sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_novel_ins + "'||':'||TITLE||':'||PATH||':'||INS_DATE||':'||FAVORITE_FLAG WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_MY_NOVEL" + CommConstants.sqlCR);
+        */
 
         DicUtils.dicSqlLog(sql.toString());
 
