@@ -44,7 +44,7 @@ public class HelpActivity extends AppCompatActivity {
         tempSb.append("* 영한 사전" + CommConstants.sqlCR);
         tempSb.append("- 단어, 예문을 검색합니다." + CommConstants.sqlCR);
         tempSb.append(" .단어를 클릭하시면 단어 상세, 예문을 클릭하시면 예문 상세를 보실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append(" .단어를 길게 클릭하시면 웹사전 검색, 단어장에 추가할 수 있고, 예문을 길게 클릭하시면 회화노트에 등록 및 TTS를 들을 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .단어를 길게 클릭하시면 웹사전 검색, 단어장에 추가할 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .없는 단어일 경우 하단에 메세지가 나오고, 오른쪽 버튼을 클릭하시면 웹사전으로 검색하실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);
         if ( screen.equals(CommConstants.screen_dictionary) ) {
@@ -293,6 +293,7 @@ public class HelpActivity extends AppCompatActivity {
             allSb.append(tempSb.toString());
         }
 
+        */
         tempSb.delete(0, tempSb.length());
         tempSb.append("* Daum 단어장" + CommConstants.sqlCR);
         tempSb.append("- Daum 단어장을 TOEIC,TOEFL,TEPS,수능영어,NEAT/NEPT,초중고영어,회화,기타 카테고리 별로 보실 수 있습니다." + CommConstants.sqlCR);
@@ -317,7 +318,6 @@ public class HelpActivity extends AppCompatActivity {
         } else {
             allSb.append(tempSb.toString());
         }
-        */
 
         tempSb.delete(0, tempSb.length());
         tempSb.append("* 오늘의 단어" + CommConstants.sqlCR);

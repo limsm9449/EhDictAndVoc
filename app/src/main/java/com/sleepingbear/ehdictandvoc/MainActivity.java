@@ -235,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(webTranslateIntent);
         } else if (id == R.id.nav_daum_voc) {
             startActivity(new Intent(getApplication(), DaumVocabularyActivity.class));
+        } else if (id == R.id.nav_toady) {
+            startActivity(new Intent(getApplication(), TodayActivity.class));
         } else if (id == R.id.nav_voc) {
             startActivity(new Intent(getApplication(), VocabularyNoteActivity.class));
         } else if (id == R.id.nav_study) {
