@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            Toast.makeText(getApplicationContext(), "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -403,6 +403,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             dictionaryListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             dictionaryListView.setOnItemClickListener(itemClickListener);
+            dictionaryListView.setOnItemLongClickListener(itemLongClickListener);
             dictionaryListView.setSelection(0);
 
             //소프트 키보드 없애기
@@ -442,7 +443,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     };
 
-    /*
     AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -450,7 +450,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Cursor cur = (Cursor) adapter.getItem(i);
 
-            if ( "SAMPLE".equals(cur.getString(cur.getColumnIndexOrThrow("KIND"))) ) {
+            if ( !"SAMPLE".equals(cur.getString(cur.getColumnIndexOrThrow("KIND"))) ) {
+                //단어장 다이얼로그 생성
+                Cursor cursor = db.rawQuery(DicQuery.getVocabularyCategory(), null);
+
+                final String[] kindCodes = new String[cursor.getCount()];
+                final String[] kindCodeNames = new String[cursor.getCount()];
+
+                int idx = 0;
+                while (cursor.moveToNext()) {
+                    kindCodes[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND"));
+                    kindCodeNames[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND_NAME")) + " 에 단어 추가";
+                    idx++;
+                }
+                cursor.close();
+
+                final AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setTitle("기능 선택");
+                dlg.setSingleChoiceItems(kindCodeNames, dSelect, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        dSelect = arg1;
+                    }
+                });
+                dlg.setNeutralButton("Web", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Cursor cur = adapter.getCursor();
+                        viewWebDictionary(cur.getString(cur.getColumnIndexOrThrow("WORD")));
+                    }
+                });
+                dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                dlg.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Cursor cur = adapter.getCursor();
+                        DicDb.insDicVoc(db, cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")), kindCodes[dSelect]);
+                        DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
+                    }
+                });
+
+                dlg.show();
+            } else {
+                /*
                 final String sampleSeq = cur.getString(cur.getColumnIndexOrThrow("_id"));
                 final String foreign = cur.getString(cur.getColumnIndexOrThrow("SENTENCE1"));
                 final String han = cur.getString(cur.getColumnIndexOrThrow("SENTENCE2"));
@@ -491,45 +537,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 dlg.show();
-            } else {
-                //단어장 다이얼로그 생성
-                Cursor cursor = db.rawQuery(DicQuery.getVocabularyCategory(), null);
-
-                final String[] kindCodes = new String[cursor.getCount()];
-                final String[] kindCodeNames = new String[cursor.getCount()];
-
-                int idx = 0;
-                while (cursor.moveToNext()) {
-                    kindCodes[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND"));
-                    kindCodeNames[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND_NAME")) + " 에 단어 추가";
-                    idx++;
-                }
-                cursor.close();
-
-                final AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
-                dlg.setTitle("기능 선택");
-                dlg.setSingleChoiceItems(kindCodeNames, dSelect, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        dSelect = arg1;
-                    }
-                });
-                dlg.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Cursor cur = adapter.getCursor();
-                        DicDb.insDicVoc(db, cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")), kindCodes[dSelect]);
-                        DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
-                    }
-                });
-
-                dlg.show();
+                */
             }
             //return ture 설정하면 Long클릭 후 클릭은 처리 안됨
             return true;
         }
     };
-    */
+
+    public void viewWebDictionary(String _word) {
+        final String word = _word;
+
+        final String[] kindCodes = new String[]{"Naver","Daum"};
+
+        final AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        dlg.setTitle("검색 사이트 선택");
+        dlg.setSingleChoiceItems(kindCodes, webDictionaryIdx, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                webDictionaryIdx = arg1;
+            }
+        });
+        dlg.setNegativeButton("취소", null);
+        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Bundle bundle = new Bundle();
+
+                bundle.putString("kind", (DicUtils.isHangule(et_search.getText().toString().trim()) ? CommConstants.dictionaryKind_h : CommConstants.dictionaryKind_f));
+                bundle.putString("site", kindCodes[webDictionaryIdx]);
+                bundle.putString("word", word);
+
+                Intent intent = new Intent(getApplication(), WebDictionaryActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        dlg.show();
+    }
 
     /**
      * 검색 단어가 변경되었으면 다시 검색을 한다.

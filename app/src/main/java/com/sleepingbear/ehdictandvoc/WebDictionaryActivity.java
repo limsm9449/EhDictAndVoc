@@ -52,7 +52,7 @@ public class WebDictionaryActivity extends AppCompatActivity {
             site = "Naver";
         }
 
-        ab = (ActionBar) getSupportActionBar();
+        ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -174,7 +174,8 @@ public class WebDictionaryActivity extends AppCompatActivity {
                     if ( webView.canGoBack() ) {
                         webView.goBack();
                     } else {
-                        Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        //Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
                     }
                     return true;
             }

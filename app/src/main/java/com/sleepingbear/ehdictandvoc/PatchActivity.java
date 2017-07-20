@@ -32,10 +32,10 @@ public class PatchActivity extends AppCompatActivity {
         patch.append("* 패치 내역" + CommConstants.sqlCR);
         patch.append(""  + CommConstants.sqlCR);
         patch.append("- 2017.07.20"  + CommConstants.sqlCR);
-        patch.append("     영한사전에 여러 기능을 추가하다보니 어플의 특색이 없어졌습니다."  + CommConstants.sqlCR);
-        patch.append("     그래서 어플 이름처럼 영한사전 기능으로 변경 및 UI를 변경하였습니다."  + CommConstants.sqlCR);
-        patch.append("     사전 이외의 기능을 많이 사용하셨다면 '최고의 영어학습' 어플을 이용해보세요."  + CommConstants.sqlCR);
-        patch.append("     이용에 불편을 드려서 죄송합니다."  + CommConstants.sqlCR);
+        patch.append("영한사전에 여러 기능을 추가하다보니 어플의 특색이 없어졌습니다."  + CommConstants.sqlCR);
+        patch.append("그래서 어플 이름처럼 영한사전 기능으로 변경하였습니다."  + CommConstants.sqlCR);
+        patch.append("사전 이외의 기능을 많이 사용하셨다면 '최고의 영어학습' 어플을 이용해보세요."  + CommConstants.sqlCR);
+        patch.append("이용에 불편을 드려서 죄송합니다."  + CommConstants.sqlCR);
 
         ((TextView) this.findViewById(R.id.my_c_patch_tv1)).setText(patch.toString());
 
